@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="css/foundation.css">
+    <link rel="stylesheet" href = "css/override.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src = "movie_controller.js"></script>
+</head>
+<nav class="top-bar" data-topbar role="navigation">
+  <ul class="title-area">
+    <li class="name">
+      <h1><a href="index.html">Home</a></h1>
+    </li>
+    <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+  </ul>
+
+  <section class="top-bar-section">
+    <!-- Right Nav Section -->
+    <ul class="right">
+        <li><a href = "manageLists.html">Your Lists</a></li>
+    </ul>
+  </section>
+</nav>  
+<body>
+    <button onclick = "listMovies(event)">List All Movies</button>
+    <div id = "addMovie-wrapper">
+        <form id = "addMovieList">
+            <h1>Add A New List</h1>
+            Name:<br>
+            <input type="text" name="title" id="listName">
+            <br>
+            <br>
+            <button type="submit" onclick = "addList(event)">Add List</button>
+        </form> 
+    </div>
+    <div id = "deleteMovie">
+        <form id = "deleteMovie">
+            <h1>Delete a Movie</h1>
+            Title:<br>
+            <input type="text" name="title" id = "deleteTitle">
+            <br><br>
+            <button type="submit" onclick = "deleteMovie(event)">Delete Movie</button>
+        </form> 
+    </div>
+    <body>
+    <div id = "updateMovie-wrapper">
+        <form id = "updateMovie">
+            <h1>Update an Existing Movie (Title must be accurate)</h1>
+            Title:<br>
+            <input type="text" name="title" id = "updateTitle">
+            <br>
+            Description:<br>
+            <input type="text" name="description" id = "updateDescription">
+            <br>
+            Director:<br>
+            <input type="text" name="director" id = "updateDirector">
+            <br>
+            Year:<br>
+            <input type="text" name="year" id = "updateYear">
+            <br>
+            Rating:<br>
+            <select name="rating" id = "updateRating">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+            <br>
+            <br><br>
+            <button type="submit" onclick = "updateMovie(event)">Update Movie</button>
+        </form> 
+    </div>
+</body>
+</body>
+</html>

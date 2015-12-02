@@ -1,0 +1,45 @@
+<%- include partial_header.ejs %> 
+
+<nav class="top-bar" data-topbar role="navigation">
+  <ul class="title-area">
+    <li class="name">
+      <h1><a href="index.html.ejs">Home</a></h1>
+    </li>
+    <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+  </ul>
+
+  <section class="top-bar-section">
+    <!-- Right Nav Section -->
+    <ul class="right">
+        <li><a href = "addMovieList.html">Add A List</a></li>
+        <li><a href = "updateMovie.html">Update A List</a></li>
+        <li><a href = "deleteMovie.html">Delete A List</a></li>
+        <li>
+            <button onclick = "listMovies(event)">List All Movies</button>
+        </li>
+    </ul>
+  </section>
+</nav>
+<h1> <%= title %> </h1>
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Description</th>
+    <th>Director</th>
+    <th>Year Made</th>
+    <th>Rating</th>
+  </tr>
+
+    <% for (i = 0; i < movieCollection.length; i++) {   
+    var movie = movieCollection[i] %>
+    <tr>
+        <td> <%= movie.title %> </td>
+        <td> <%= movie.description %> </td>
+        <td> <%= movie.director %> </td>
+        <td> <%= movie.year %> </td>
+        <td> <%= movie.rating %> </td>
+    </tr>
+    <% } %>
+</table>
+
+<% include partial_footer.ejs %>

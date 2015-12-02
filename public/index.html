@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="css/foundation.css">
+    <link rel="stylesheet" href = "css/override.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src = "movie_controller.js"></script>
+</head>
+<nav class="top-bar" data-topbar role="navigation">
+  <ul class="title-area">
+    <li class="name">
+      <h1><a href="index.html.ejs">Home</a></h1>
+    </li>
+    <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+  </ul>
+
+  <section class="top-bar-section">
+    <!-- Right Nav Section -->
+    <ul class="right">
+        <li><a href = "manageLists.html">Your Lists</a></li>
+    </ul>
+  </section>
+</nav>
+<body>
+    <div id = "getMovie-wrapper">
+        <form id = "getMovie">
+            <h1>Find a Movie</h1>
+            Title:<br>
+            <input type = "text" name = "title" id = "getTitle">
+            <br>
+            <button type="submit" onclick = "findMovieInIMDB(event)">Find Movie</button>
+        </form>
+    </div>
+    <div id = "returned-movie">
+        
+    </div>
+
+
+</body>
+</html>
