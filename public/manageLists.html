@@ -4,7 +4,10 @@
     <link rel="stylesheet" href="css/foundation.css">
     <link rel="stylesheet" href = "css/override.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src = "movie_controller.js"></script>
+    <script src = "manageLists.js"></script>
+    <script src="js/vendor/jquery.js"></script>
+    <script src="js/foundation/foundation.js"></script>
+    <script src="js/foundation/foundation.accordion.js"></script>
 </head>
 <nav class="top-bar" data-topbar role="navigation">
   <ul class="title-area">
@@ -22,17 +25,30 @@
   </section>
 </nav>  
 <body>
-    <button onclick = "listMovies(event)">List All Movies</button>
-    <div id = "addMovie-wrapper">
-        <form id = "addMovieList">
-            <h1>Add A New List</h1>
-            Name:<br>
-            <input type="text" name="title" id="listName">
-            <br>
-            <br>
-            <button type="submit" onclick = "addList(event)">Add List</button>
-        </form> 
+    <button type="submit" onclick = "addList(event)">Add List</button>
+    <div id = "listsTable">
+        <ul id = "listsAccordion" class="accordion" data-accordion>
+          <li class="accordion-navigation">
+            <a href="#panel1a">Accordion 1</a>
+            <div id="panel1a" class="content">
+              Panel 1. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+            </div>
+          </li>
+          <li class="accordion-navigation">
+            <a href="#panel2a">Accordion 2</a>
+            <div id="panel2a" class="content">
+              Panel 2. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+            </div>
+          </li>
+          <li class="accordion-navigation">
+            <a href="#panel3a">Accordion 3</a>
+            <div id="panel3a" class="content">
+              Panel 3. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+            </div>
+          </li>
+        </ul>
     </div>
+<!--
     <div id = "deleteMovie">
         <form id = "deleteMovie">
             <h1>Delete a Movie</h1>
@@ -42,35 +58,18 @@
             <button type="submit" onclick = "deleteMovie(event)">Delete Movie</button>
         </form> 
     </div>
-    <body>
+-->
+<!--
     <div id = "updateMovie-wrapper">
         <form id = "updateMovie">
             <h1>Update an Existing Movie (Title must be accurate)</h1>
             Title:<br>
             <input type="text" name="title" id = "updateTitle">
             <br>
-            Description:<br>
-            <input type="text" name="description" id = "updateDescription">
-            <br>
-            Director:<br>
-            <input type="text" name="director" id = "updateDirector">
-            <br>
-            Year:<br>
-            <input type="text" name="year" id = "updateYear">
-            <br>
-            Rating:<br>
-            <select name="rating" id = "updateRating">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-            </select>
-            <br>
-            <br><br>
             <button type="submit" onclick = "updateMovie(event)">Update Movie</button>
         </form> 
     </div>
-</body>
+-->
+
 </body>
 </html>

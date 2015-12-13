@@ -1,10 +1,14 @@
 var movieModel = require("../models/movieModel.js")
 
 exports.init = function(app) {
+    app.get("/list/all", getAllLists);
+    app.get("/list/:list", getMoviesInList);
     app.get("/movie/list", getList);
     app.get("/movie/add/:list/:title", addMovieToList);
-    app.put("/newList/:name", createList);                             
-    app.post("/movie/update/:title/:description/:director/:year/:rating", updateMovie);
+    
+    app.put("/newList/:name", createList);            
+        app.post("/movie/update/:title/:description/:director/:year/:rating", updateMovie);
+    
     app.delete("/movie/delete/:title", deleteList);
 }
 
@@ -62,3 +66,18 @@ addMovieToList = function(request, response) {
     movieModel.addMovieToList(list, title)
 }
     
+getAllLists = function(request, response) {
+    console.log("DOES IT GET HERE?")
+    movieModel.getArrayOfLists(function(listArray) {
+        console.log("ARRAY SHOULD BE: " + listArray.toString().join)
+        response.end(listArray.toString())
+    });
+}
+
+getMoviesInList = function(request, response) {
+    var listname = request.params.list
+    console.log("LIST NAME PASSED IN IS :" +listname)
+    movieModel.getMoviesInList(listname, function(movieArray) {
+        response.end(listname +","+ movieArray.toString())
+    });
+}

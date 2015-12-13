@@ -31,6 +31,8 @@ mongoClient.connect('mongodb://'+connection_string, function(err, db) {
   mongoDB = db; // Make reference to db globally available.
 });
 
+var curUser = "Angela";
+
 /*
  * In the methods below, notice the use of a callback argument,
  * how that callback function is called, and the argument it is given.
@@ -51,19 +53,24 @@ exports.createList = function(listname) {
   // Do an asynchronous insert into the given collection
     
     
+//    mongoDB.collection('users').insert(
+//        {"username": curUser, 
+//        "lists": [{"Favorites": []},
+//         {"To Watch": []}]       
+//        }
+//    )
+    
+    var query = {};
+    query[listname] = [];
+    
+    
     mongoDB.collection('users').insert(
-        {"username": "Angela", 
-        "lists": [{"Favorites": []},
-                  {"To Watch": []}
-                 ]}
+        {"username": curUser}
     )
     
-    
     mongoDB.collection('users').update(
-        {"username": "Angela"},
-        { 
-            $push: {"lists": {listname: []}}
-        }
+        {"username": curUser},
+        {$set: query}
     )
 }
 
@@ -125,11 +132,59 @@ var doError = function(e) {
         throw new Error(e);
 }
 
-exports.addMovieToList = function(list, title) {
+exports.addMovieToList = function(list, title) {    
+    
+    var query = {}
+    query[list] = title;
+    
+    console.log("query is: " + JSON.stringify(query));
     
     mongoDB.collection("users").update(
-      {"username": "Angela"},
-      { $push: { "lists.test": title}}
+      {"username": curUser},
+      { $push: query}
     )
 }
         
+
+exports.getArrayOfLists = function(callback) {
+    console.log("HOW ABOUT HERE")
+    var notListnames = ["_id", "username"];
+    mongoDB.collection("users").findOne({"username": curUser}, function(err, result) {
+        if (err) { /* handle err */ }
+
+        if (result) {
+            var listObject = [];
+           for (var key in result) {
+                key = key.toString()
+                if ( result.hasOwnProperty(key) && (notListnames.indexOf(key) == -1)) {
+                    listObject.push(key);
+                    console.log("LIST IS:" + key)
+                }
+            }
+            console.log("LIST OBJECT SHOULD BE: " + listObject)
+            callback(listObject)
+        }
+    }) 
+}
+
+
+exports.getMoviesInList = function(listname, callback) {
+    console.log("LISTNAME AT THIS POINT IS: " + listname)
+    var listQuery = {};
+    listQuery[listname] = 1;
+    mongoDB.collection("users").findOne({}, listQuery, function(err, result) {
+        if (err) { /* handle err */ }
+
+        if (result) {
+            var movies = result[listname]
+            console.log("MOVIES IS: " + movies)
+            callback(movies)
+        }
+    })
+}
+
+
+
+
+
+

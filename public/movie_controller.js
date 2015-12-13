@@ -33,6 +33,8 @@ function findMovieInIMDB(event)  {
                 }
             },
             success: function (result) {
+                allLists()
+                
                 var movie = JSON.parse(result)
                 $("#returned-movie").append(
                     "Title: " + movie.Title + "<br>" +
@@ -52,33 +54,52 @@ function findMovieInIMDB(event)  {
                     "imdbRating: " + movie.imdbRating + "<br>" +
                     "imdbVotes: " + movie.imdbVotes +"<br>"
                 )
-                $("#returned-movie").append("<button onclick = 'addMovieToList()'>Add Movie To List</button>")
+//                selectListToAdd();
+                $("#returned-movie").append("<button onclick = 'addMovieToList()'>Add To List</button>")
             },
         })
     } else {
-        $.ajax({
-            url: '/movie/list',
-            type: 'GET',
-            contentType: "application/javascript",
-            success: function(result) { 
-                $("body").html(result)
-            }
-        });
+        $("#returned-movie").html("Uh Oh, movie not found!")
     }
 }
 
 function addMovieToList() {
 //    event.preventDefault();
+    
     var title = $("#getTitle").val();
+    var s = document.getElementById("movie-list-options")
+    var list = s.options[s.selectedIndex].value;
     console.log("TITLE IS :" + title)
+    console.log("LIST IS :" + list)
     $.ajax({
-        url: '/movie/add/test/'+title,
+        url: '/movie/add/'+list+"/"+title,
         type: 'GET',
         contentType: "application/javascript",
         success: function(result) { 
             alert(result)
         }
     });
+}
+
+function allLists() {
+    $.ajax({
+        type: 'GET',
+        dataType: 'text',
+        url: '/list/all',
+        statusCode: {
+            403: function () {
+                console.log('HTTP 403 Forbidden!')
+            }
+        },
+        success: function (result) {
+            console.log("Result is... : " + result)
+            var movieArray = result.split(",");
+            for (var i = 0; i < movieArray.length; i++) {
+                console.log("LISTS: " + movieArray[i])
+                $("#movie-list-options").append("<option value ='" + movieArray[i] + "'>"+ movieArray[i]+"</option>")
+            }
+        }
+     })
 }
 
 function listMovies(event) {
