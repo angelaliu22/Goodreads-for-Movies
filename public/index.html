@@ -28,13 +28,15 @@
             Title:<br>
             <input type = "text" name = "title" id = "getTitle">
             <br>
-            <button type="submit" onclick = "findMovieInIMDB(event)">Find Movie</button>
+            <button type="submit" onclick = "findMovieInIMDB(event)" style = "display: none;">Find Movie</button>
         </form>
     </div>
-    <select id = 'movie-list-options'>
-        <option value='Select'>Select a List</option>
-    </select>
-    
+    <div id = "addMovieOptions" style="display: none;">
+        <select id = 'movie-list-options'>
+        
+        </select>
+        <button onclick = 'addMovieToList()'>Add To List</button>
+    </div>
     <div id = "returned-movie">
     </div>
 

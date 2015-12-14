@@ -37,7 +37,8 @@ function findMovieInIMDB(event)  {
                 
                 var movie = JSON.parse(result)
                 $("#returned-movie").append(
-                    "Title: " + movie.Title + "<br>" +
+                    movie.Title + "<br>" +
+                    "<img src ='" + movie.Poster + "'><br>" +
                     "Year: " + movie.Year + "<br>" +
                     "Rated: " + movie.Rated + "<br>" +
                     "Released: " + movie.Released + "<br>" +
@@ -50,16 +51,15 @@ function findMovieInIMDB(event)  {
                     "Language: " + movie.Language + "<br>" +
                     "Country: " + movie.Country + "<br>" +
                     "Awards: " + movie.Awards + "<br>" +
-                    "Poster: <img src ='" + movie.Poster + "'><br>" +
                     "imdbRating: " + movie.imdbRating + "<br>" +
                     "imdbVotes: " + movie.imdbVotes +"<br>"
                 )
 //                selectListToAdd();
-                $("#returned-movie").append("<button onclick = 'addMovieToList()'>Add To List</button>")
+                $("#addMovieOptions").css("display","inline");
             },
         })
     } else {
-        $("#returned-movie").html("Uh Oh, movie not found!")
+        document.get("returned-movie").html("Uh Oh, movie not found!")
     }
 }
 
@@ -76,7 +76,7 @@ function addMovieToList() {
         type: 'GET',
         contentType: "application/javascript",
         success: function(result) { 
-            alert(result)
+            window.alert("Movie added!");
         }
     });
 }
