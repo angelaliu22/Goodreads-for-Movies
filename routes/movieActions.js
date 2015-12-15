@@ -1,4 +1,5 @@
 var movieModel = require("../models/movieModel.js")
+var userDB = require("../models/users.js")
 
 exports.init = function(app) {
     app.get("/list/all", getAllLists);
@@ -11,10 +12,6 @@ exports.init = function(app) {
     
     app.delete("/movie/delete/:title", deleteList);
 }
-
-
-var mongoModel = require("../models/movieModel.js")
-
 
 getList = function(request, response) {
     var message = "All Movies In Your List";    
