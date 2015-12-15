@@ -2,6 +2,7 @@ var movieModel = require("../models/movieModel.js")
 var userDB = require("../models/users.js")
 
 exports.init = function(app) {
+    app.get("/IMDb/:title", getFromIMDb);
     app.get("/list/all", getAllLists);
     app.get("/list/:list", getMoviesInList);
     app.get("/movie/list", getList);
@@ -77,4 +78,17 @@ getMoviesInList = function(request, response) {
     movieModel.getMoviesInList(listname, function(movieArray) {
         response.end(listname +","+ movieArray.toString())
     });
+}
+
+getFromIMDb = function(req, resp) {
+    var title = req.params.title
+    var movie = {};
+    
+    var request = require('request');
+    request('http://www.omdbapi.com/?t=' + title, function (error, response, body) {
+      if (!error && response.statusCode == 200) {
+          console.log(body)
+        resp.end(body.toString()) 
+      }
+    })
 }

@@ -22,20 +22,19 @@ function findMovieInIMDB(event)  {
     $("#returned-movie").empty();
     if (title.length >= 1) {
         
-        var movie = {};
         $.ajax({
             type: 'GET',
             dataType: 'text',
-            url: 'http://www.omdbapi.com/?t=' + title,
+            url: '/IMDb/' + title,
             statusCode: {
                 403: function () {
                     console.log('HTTP 403 Forbidden!')
                 }
             },
             success: function (result) {
+                var movie = JSON.parse(result)
                 allLists()
                 
-                var movie = JSON.parse(result)
                 $("#returned-movie").append(
                     movie.Title + "<br>" +
                     "<img src ='" + movie.Poster + "'><br>" +
